@@ -328,6 +328,7 @@ export default function Landing() {
 
       {/* ---------- Hero ---------- */}
       <header className={styles.hero}>
+        <div className={styles.heroGrid} aria-hidden />
         <div className={styles.heroInner}>
           <div className={styles.heroCopy}>
             <Reveal>
@@ -398,6 +399,19 @@ export default function Landing() {
           ))}
         </div>
       </header>
+
+      {/* ---------- Social proof ---------- */}
+      <section className={styles.logosSection}>
+        <p className={styles.logosTitle}>Trusted by job seekers at</p>
+        <div className={styles.logosRow}>
+          <span className={styles.logoItem}>Google</span>
+          <span className={styles.logoItem}>Amazon</span>
+          <span className={styles.logoItem}>Microsoft</span>
+          <span className={styles.logoItem}>Meta</span>
+          <span className={styles.logoItem}>Apple</span>
+          <span className={styles.logoItem}>Stripe</span>
+        </div>
+      </section>
 
       {/* ---------- Showcases (product-feature splits) ---------- */}
       <section className={styles.section}>
