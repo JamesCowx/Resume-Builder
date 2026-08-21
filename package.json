@@ -1,5 +1,5 @@
 {
-  "name": "resume-builder-tmp",
+  "name": "resume-builder",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,12 +9,17 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@libsql/client": "^0.17.4",
+    "@sparticuz/chromium": "^131.0.1",
+    "docx": "^9.7.1",
+    "lucide-react": "^1.31.0",
     "next": "16.3.0",
+    "puppeteer-core": "^25.8.0",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

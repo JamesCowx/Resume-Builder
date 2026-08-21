@@ -1,0 +1,178 @@
+
+> resume-builder@0.1.0 dev
+> next dev -p 3001
+
+▲ Next.js 16.3.0 (Turbopack)
+- Local:         http://localhost:3001
+- Network:       http://172.31.240.1:3001
+✓ Ready in 907ms
+✓ Running next.config.ts took 148ms
+
+ GET / 200 in 347ms (next.js: 179ms, application-code: 169ms)
+ GET / 200 in 228ms (next.js: 13ms, application-code: 215ms)
+ GET / 200 in 231ms (next.js: 7ms, application-code: 223ms)
+ GET / 200 in 229ms (next.js: 20ms, application-code: 209ms)
+ GET / 200 in 208ms (next.js: 81ms, application-code: 127ms)
+ GET / 200 in 65ms (next.js: 9ms, application-code: 56ms)
+ GET / 200 in 69ms (next.js: 4ms, application-code: 66ms)
+ GET / 200 in 164ms (next.js: 7ms, application-code: 157ms)
+ GET / 200 in 154ms (next.js: 24ms, application-code: 130ms)
+ GET / 200 in 109ms (next.js: 15ms, application-code: 94ms)
+ GET /api/auth/me 200 in 225ms (next.js: 127ms, application-code: 98ms)
+ GET /api/auth/me 200 in 235ms (next.js: 225ms, application-code: 10ms)
+ GET /api/auth/me 200 in 19ms (next.js: 6ms, application-code: 12ms)
+ GET /api/auth/me 200 in 37ms (next.js: 25ms, application-code: 12ms)
+ GET /api/auth/me 200 in 13ms (next.js: 4ms, application-code: 9ms)
+ GET /api/auth/me 200 in 25ms (next.js: 15ms, application-code: 10ms)
+ GET /api/auth/me 200 in 19ms (next.js: 10ms, application-code: 9ms)
+ GET /api/auth/me 200 in 31ms (next.js: 22ms, application-code: 9ms)
+ GET /api/auth/me 200 in 59ms (next.js: 39ms, application-code: 20ms)
+ GET /api/auth/me 200 in 70ms (next.js: 62ms, application-code: 8ms)
+ GET /api/auth/me 200 in 10ms (next.js: 4ms, application-code: 6ms)
+ GET /api/auth/me 200 in 11ms (next.js: 4ms, application-code: 7ms)
+ GET /api/auth/me 200 in 8ms (next.js: 3ms, application-code: 5ms)
+ GET /api/auth/me 200 in 16ms (next.js: 10ms, application-code: 6ms)
+ GET /api/auth/me 200 in 25ms (next.js: 20ms, application-code: 5ms)
+ GET /api/auth/me 200 in 15ms (next.js: 10ms, application-code: 5ms)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+ GET / 200 in 38ms (next.js: 3ms, application-code: 35ms)
+ GET / 200 in 32ms (next.js: 3ms, application-code: 30ms)
+ GET / 200 in 31ms (next.js: 3ms, application-code: 29ms)
+ GET /api/auth/me 200 in 5ms (next.js: 1.8ms, application-code: 3ms)
+ GET /print?token=1786661413447-0a68f6830588c826b778bb11bd8 200 in 197ms (next.js: 78ms, application-code: 119ms)
+ POST /api/pdf 200 in 2.3s (next.js: 42ms, application-code: 2.2s)
+ GET / 200 in 45ms (next.js: 4ms, application-code: 41ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+ GET /api/auth/me 200 in 8ms (next.js: 4ms, application-code: 4ms)
+ GET /api/auth/me 200 in 15ms (next.js: 10ms, application-code: 5ms)
+[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <SegmentViewNode type="page" pagePath="page.tsx">
+      <SegmentTrieNode>
+      <Home>
+        <ResumeBuilder>
+          <div className="builder-mo...">
+            <header>
+            <main className="builder-mo...">
+              <div className="builder-mo...">
+                <ResumeForm data={{personal:{...}, ...}} onPersonalChange={function updatePersonal} ...>
+                  <div className="form-modul...">
+                    <Section title="Personal D...">
+                      <section className="form-modul...">
+                        <div>
+                        <div className="form-modul...">
+                          <div className="form-modul...">
+                            <div>
+                            <div className="form-modul...">
+                              <Field>
+                              <Field>
+                              <Field label="Email" value="" onChange={function onChange} placeholder="jane@email...">
+                                <div className={"form-mod..."}>
+                                  <label>
+                                  <input
+                                    className="form-module__8K-bGW__input"
+                                    value=""
+                                    onChange={function onChange}
+                                    placeholder="jane@email.com"
+-                                   style={{background-size:"auto, 25px...",background-image:"none, url(...", ...}}
+                                  >
+-                                 <button
+-                                   type="button"
+-                                   style={{border-top-width:"0px",border-top-style:"none",border-top-color:"currentcolor", ...}}
+-                                 >
+                              ...
+                    ...
+              ...
+    ...
+
+    at div (unknown)
+    at Field (components/ResumeForm.tsx:49:5)
+    at ResumeForm (components/ResumeForm.tsx:314:11)
+    at ResumeBuilder (components/ResumeBuilder.tsx:1140:15)
+    at Home (app\page.tsx:4:10)
+  47 | }) {
+  48 |   return (
+> 49 |     <div className={`${styles.field} ${full ? styles.gridFull : ""}`}>
+     |     ^
+  50 |       <label className={styles.label}>{label}</label>
+  51 |       {textarea ? (
+  52 |         <textarea
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+[browser] ObjectMultiplex - orphaned data for stream "metamask-multichain-provider" (moz-extension://fb8e3be1-43a3-448b-8c61-76e9ab4059df/scripts/inpage.js;:1:28380)
+ GET / 200 in 753ms (next.js: 125ms, application-code: 627ms)
+ GET /builder 200 in 624ms (next.js: 549ms, application-code: 74ms)
+ GET / 200 in 294ms (next.js: 29ms, application-code: 265ms)
+ GET / 200 in 320ms (next.js: 6ms, application-code: 314ms)
+ GET /print?token=1786674922609-ae3adce7be07e84820d69c8db638 200 in 122ms (next.js: 44ms, application-code: 78ms)
+ POST /api/pdf 200 in 2.0s (next.js: 54ms, application-code: 1993ms)
+ GET / 200 in 240ms (next.js: 5ms, application-code: 235ms)
+ GET /api/auth/me 200 in 86ms (next.js: 41ms, application-code: 46ms)
+ GET /builder 200 in 57ms (next.js: 7ms, application-code: 50ms)
+ GET /builder 200 in 82ms (next.js: 15ms, application-code: 67ms)
+ GET / 200 in 232ms (next.js: 5ms, application-code: 227ms)
+ POST /api/share 200 in 308ms (next.js: 225ms, application-code: 83ms)
+ GET /s/817b9773d53ce3d3b151e6b722780272 200 in 1280ms (next.js: 1089ms, application-code: 191ms)
+ GET /builder 200 in 87ms (next.js: 13ms, application-code: 74ms)
+ GET /robots.txt 200 in 225ms (next.js: 198ms, application-code: 28ms)
+ GET /sitemap.xml 200 in 164ms (next.js: 156ms, application-code: 8ms)
+ GET / 200 in 563ms (next.js: 104ms, application-code: 459ms)
+ GET /builder 200 in 158ms (next.js: 29ms, application-code: 129ms)
+ GET /print?token=1786675623244-89f3381ed15c78d7e8238745ba58 200 in 80ms (next.js: 16ms, application-code: 65ms)
+ POST /api/pdf 200 in 2.5s (next.js: 35ms, application-code: 2.5s)
+ POST /api/share 200 in 85ms (next.js: 32ms, application-code: 53ms)
+ GET /s/1f835893caa969239ed74474ef82291e 200 in 155ms (next.js: 45ms, application-code: 111ms)
+ GET /s/ffffffffffffffffffffffffffffffff 200 in 50ms (next.js: 3ms, application-code: 47ms)
+ GET /builder 200 in 68ms (next.js: 10ms, application-code: 58ms)
+ POST /api/ai/assist 400 in 253ms (next.js: 220ms, application-code: 33ms)
+ GET /print?token=1786676243780-50ca60ea5460da00e58a9a0d7b8 200 in 102ms (next.js: 12ms, application-code: 91ms)
+ POST /api/pdf 200 in 2.0s (next.js: 10ms, application-code: 2.0s)
+ GET / 200 in 745ms (next.js: 59ms, application-code: 686ms)
+ GET /builder?template=creative 200 in 109ms (next.js: 41ms, application-code: 68ms)
+ GET /builder 200 in 76ms (next.js: 4ms, application-code: 72ms)
+ GET /api/auth/me 200 in 101ms (next.js: 89ms, application-code: 12ms)
+ GET / 200 in 288ms (next.js: 3ms, application-code: 285ms)
+ GET / 200 in 238ms (next.js: 3ms, application-code: 235ms)

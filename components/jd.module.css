@@ -1,0 +1,224 @@
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-xs);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.matchBadge {
+  font-size: 14px;
+  font-weight: 800;
+  padding: 2px 12px;
+  border-radius: var(--radius-pill);
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.matchHigh {
+  background: var(--green);
+}
+
+.matchMid {
+  background: var(--amber);
+}
+
+.matchLow {
+  background: var(--red);
+}
+
+.hint {
+  margin-left: auto;
+  font-size: 11.5px;
+  color: var(--text-faint);
+}
+
+.body {
+  margin-top: 14px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 12px;
+}
+
+.textarea {
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  outline: none;
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.5;
+  width: 100%;
+}
+
+.textarea:focus {
+  border-color: var(--brand);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px var(--brand-ring);
+}
+
+.resultTitle {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin: 14px 0 8px;
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.chip {
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  padding: 4px 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.chipCovered {
+  background: var(--green-soft);
+  color: var(--green);
+  border: 1px solid var(--green-border);
+}
+
+.chipMissing {
+  background: var(--amber-soft);
+  color: var(--amber);
+  border: 1px solid var(--amber-border);
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.chipMissing:hover {
+  background: color-mix(in srgb, var(--amber-soft) 65%, var(--surface));
+  transform: translateY(-1px);
+}
+
+.addBtn {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--brand);
+  background: var(--brand-soft);
+  border: 1px solid var(--brand-ring);
+  border-radius: var(--radius-md);
+  padding: 6px 11px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.addBtn:hover {
+  background: var(--brand-ring);
+  border-color: var(--brand);
+}
+
+.addBtn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.empty {
+  font-size: 12.5px;
+  color: var(--text-faint);
+  margin-top: 8px;
+}
+
+.aiBtn {
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--purple);
+  background: var(--purple-soft);
+  border: 1px solid var(--purple-border);
+  border-radius: var(--radius-md);
+  padding: 7px 13px;
+  cursor: pointer;
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.aiBtn:hover {
+  background: color-mix(in srgb, var(--purple-soft) 70%, var(--surface));
+  border-color: var(--purple);
+}
+
+.aiBtn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* ATS checklist */
+.checkList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.checkItem {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.checkIcon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+.checkPass {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.checkFail {
+  background: var(--red-soft);
+  color: var(--red);
+}
+
+.checkLabel {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.checkDetail {
+  font-size: 11.5px;
+  color: var(--text-faint);
+  margin: 1px 0 0;
+}

@@ -1,0 +1,42 @@
+
+> resume-builder@0.1.0 dev
+> next dev
+
+▲ Next.js 16.3.0 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://172.31.240.1:3000
+✓ Ready in 452ms
+✓ Running next.config.ts took 60ms
+
+ GET / 200 in 355ms (next.js: 184ms, application-code: 171ms)
+ GET /api/auth/me 200 in 273ms (next.js: 212ms, application-code: 62ms)
+ POST /api/auth/register 200 in 196ms (next.js: 123ms, application-code: 73ms)
+ POST /api/auth/login 200 in 154ms (next.js: 110ms, application-code: 43ms)
+ POST /api/auth/login 200 in 48ms (next.js: 3ms, application-code: 45ms)
+ GET /api/docs 200 in 101ms (next.js: 96ms, application-code: 5ms)
+ GET /print?token=1786658025785-3df33db737e993bbf77a836698 200 in 144ms (next.js: 50ms, application-code: 94ms)
+ POST /api/pdf 200 in 3.6s (next.js: 33ms, application-code: 3.6s)
+ GET /print?token=1786658034592-b73a577d901bb897f39ab6f36b38 200 in 49ms (next.js: 7ms, application-code: 41ms)
+ POST /api/pdf 200 in 1090ms (next.js: 2ms, application-code: 1088ms)
+ GET /print?token=1786658040709-9e850c534f72f876cec19135cd98 200 in 39ms (next.js: 6ms, application-code: 33ms)
+ POST /api/pdf 200 in 1110ms (next.js: 2ms, application-code: 1107ms)
+ GET /print?token=invalid-test 200 in 31ms (next.js: 3ms, application-code: 28ms)
+ GET /print?token=invalid-test 200 in 27ms (next.js: 3ms, application-code: 24ms)
+ GET /print?token=1786658079524-692029111f311874bf8715fda38 200 in 59ms (next.js: 17ms, application-code: 42ms)
+ POST /api/pdf 200 in 1271ms (next.js: 9ms, application-code: 1262ms)
+ GET /print?token=1786658086545-4ad95cb83df855f46feefcf35d 200 in 60ms (next.js: 5ms, application-code: 55ms)
+ POST /api/pdf 200 in 1281ms (next.js: 2ms, application-code: 1279ms)
+ POST /api/auth/login 200 in 82ms (next.js: 2ms, application-code: 80ms)
+ PUT /api/docs/doc-1 200 in 785ms (next.js: 772ms, application-code: 13ms)
+ GET /api/docs 200 in 5ms (next.js: 2ms, application-code: 3ms)
+ DELETE /api/docs/doc-1 200 in 21ms (next.js: 17ms, application-code: 4ms)
+ GET /api/docs 200 in 6ms (next.js: 3ms, application-code: 4ms)
+ POST /api/auth/login 200 in 45ms (next.js: 1.6ms, application-code: 43ms)
+ PUT /api/docs/doc-cover 200 in 19ms (next.js: 14ms, application-code: 5ms)
+ GET /api/docs 200 in 9ms (next.js: 6ms, application-code: 3ms)
+ POST /api/auth/login 200 in 42ms (next.js: 2ms, application-code: 40ms)
+ DELETE /api/docs/doc-cover 200 in 20ms (next.js: 15ms, application-code: 5ms)
+ GET / 200 in 49ms (next.js: 3ms, application-code: 46ms)
+ GET / 200 in 42ms (next.js: 3ms, application-code: 39ms)
+ GET /api/lists 404 in 52ms (next.js: 25ms, application-code: 27ms)
+[?25h
