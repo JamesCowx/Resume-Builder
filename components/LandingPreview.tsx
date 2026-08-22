@@ -7,7 +7,7 @@ import type { TemplateId } from "@/components/Templates";
 import styles from "./landing.module.css";
 
 const SHEET_W = 794;
-const SCALE = 0.4;
+const SCALE = 0.22;
 const ROTATE_MS = 4500;
 
 const TEMPLATE_ACCENTS: Record<TemplateId, string> = {
