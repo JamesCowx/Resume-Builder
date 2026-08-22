@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {
   ArrowRight,
+  ArrowUpRight,
   Check,
   CheckCircle2,
   ClipboardCopy,
@@ -21,6 +22,9 @@ import {
   Users,
   TrendingUp,
   Clock,
+  Globe,
+  Smartphone,
+  Monitor,
 } from "lucide-react";
 import { sampleResume } from "@/lib/types";
 import { ResumeDocument, TEMPLATES } from "@/components/Templates";
@@ -32,7 +36,7 @@ import styles from "./landing.module.css";
 
 const SHEET_W = 794;
 const SHEET_H = 1123;
-const GALLERY_SCALE = 0.24;
+const GALLERY_SCALE = 0.22;
 
 function GalleryPreview({ template }: { template: TemplateId }) {
   return (
@@ -50,7 +54,7 @@ function GalleryPreview({ template }: { template: TemplateId }) {
   );
 }
 
-/* ---------- Feature showcases (product-style mocks) ---------- */
+/* ---------- Feature showcases ---------- */
 
 function AiMock() {
   return (
@@ -145,10 +149,10 @@ function MatchMock() {
 
 function ExportMock() {
   const rows = [
-    { icon: FileDown, label: "resume.pdf", sub: "Pixel-perfect A4 · ready to send", pct: 100, done: true },
-    { icon: FileText, label: "resume.docx", sub: "Editable in Word & Google Docs", pct: 100, done: true },
-    { icon: ClipboardCopy, label: "Plain text copy", sub: "Clean output for ATS paste", pct: 100, done: true },
-    { icon: Link2, label: "Public share link", sub: "Copied to clipboard", pct: 100, done: true },
+    { icon: FileDown, label: "resume.pdf", sub: "Pixel-perfect A4 · ready to send" },
+    { icon: FileText, label: "resume.docx", sub: "Editable in Word & Google Docs" },
+    { icon: ClipboardCopy, label: "Plain text copy", sub: "Clean output for ATS paste" },
+    { icon: Link2, label: "Public share link", sub: "Copied to clipboard" },
   ];
   return (
     <div className={styles.mockCard}>
@@ -178,63 +182,82 @@ function ExportMock() {
   );
 }
 
-/* ---------- Content data ---------- */
+/* ---------- Bento features ---------- */
 
-const FEATURES = [
+const BENTO_FEATURES = [
   {
     icon: LayoutTemplate,
     title: "9 designer templates",
     body: "From minimal to executive, every template is hand-tuned for readability and built to fit one page.",
+    span: "span2",
+    accent: "blue",
   },
   {
     icon: Sparkles,
     title: "AI writing assistant",
     body: "Bring your own API key and let AI rewrite your summary, sharpen bullet points, and suggest skills.",
-  },
-  {
-    icon: FileCheck,
-    title: "ATS-friendly output",
-    body: "A built-in checklist and plain-text export make sure recruiters' software can read every word.",
+    span: "span1",
+    accent: "purple",
   },
   {
     icon: Target,
     title: "Job match scoring",
     body: "Paste a job description and instantly see which keywords you cover and which ones to add.",
+    span: "span1",
+    accent: "cyan",
   },
   {
-    icon: Mail,
-    title: "Cover letters, too",
-    body: "Pair every resume with a matching cover letter — sender details pull from your resume automatically.",
-  },
-  {
-    icon: Cloud,
-    title: "Cloud sync & backup",
-    body: "Create a free account to sync across devices, or export a full JSON backup any time.",
+    icon: FileCheck,
+    title: "ATS-friendly output",
+    body: "A built-in checklist and plain-text export make sure recruiters' software can read every word.",
+    span: "span1",
+    accent: "green",
   },
   {
     icon: FileDown,
     title: "Pixel-perfect PDF",
     body: "One click downloads a crisp, print-perfect A4 PDF rendered from your exact preview.",
+    span: "span1",
+    accent: "amber",
+  },
+  {
+    icon: Mail,
+    title: "Cover letters, too",
+    body: "Pair every resume with a matching cover letter — sender details pull from your resume automatically.",
+    span: "span2",
+    accent: "rose",
+  },
+  {
+    icon: Cloud,
+    title: "Cloud sync & backup",
+    body: "Create a free account to sync across devices, or export a full JSON backup any time.",
+    span: "span1",
+    accent: "blue",
   },
   {
     icon: ShieldCheck,
     title: "Private by design",
     body: "Your resumes live on your device by default. AI keys are stored only in your own browser.",
+    span: "span1",
+    accent: "green",
   },
 ];
 
 const STEPS = [
   {
+    num: "01",
     icon: LayoutTemplate,
     title: "Pick a template",
     body: "Browse nine professional layouts and switch between them at any time — your content never moves.",
   },
   {
+    num: "02",
     icon: PenLine,
     title: "Fill in your details",
     body: "A guided editor with drag-and-drop reordering, instant live preview, and full undo/redo.",
   },
   {
+    num: "03",
     icon: FileDown,
     title: "Download your PDF",
     body: "Export a pixel-perfect A4 PDF, a Word file, or copy ATS-friendly plain text in one click.",
@@ -248,6 +271,7 @@ const TESTIMONIALS = [
     name: "Dana K.",
     role: "Product Manager",
     initials: "DK",
+    rating: 5,
   },
   {
     quote:
@@ -255,6 +279,7 @@ const TESTIMONIALS = [
     name: "Marcus T.",
     role: "Software Engineer",
     initials: "MT",
+    rating: 5,
   },
   {
     quote:
@@ -262,6 +287,7 @@ const TESTIMONIALS = [
     name: "Priya S.",
     role: "Marketing Lead",
     initials: "PS",
+    rating: 5,
   },
 ];
 
@@ -292,17 +318,10 @@ const FAQS = [
   },
 ];
 
-const STATS = [
-  { value: 9, suffix: "", label: "Resume templates", icon: LayoutTemplate },
-  { value: 2, suffix: "", label: "Cover letter designs", icon: Mail },
-  { value: 11, suffix: "", label: "Typefaces included", icon: FileText },
-  { value: 1, suffix: "", label: "Click to PDF", icon: Zap },
-];
-
-const METRICS = [
-  { value: "2 min", label: "Average build time", icon: Clock },
-  { value: "3x", label: "More interviews", icon: TrendingUp },
-  { value: "50k+", label: "Resumes created", icon: Users },
+const PLATFORMS = [
+  { icon: Monitor, label: "Desktop" },
+  { icon: Smartphone, label: "Mobile" },
+  { icon: Globe, label: "Any browser" },
 ];
 
 export default function Landing() {
@@ -346,13 +365,19 @@ export default function Landing() {
         <div className={styles.heroInner}>
           <div className={styles.heroCopy}>
             <Reveal>
-              <span className={styles.badge}>
-                <Sparkles size={13} strokeWidth={2.5} />
-                Free forever · No signup to start
-              </span>
+              <div className={styles.badgeRow}>
+                <span className={styles.badge}>
+                  <Sparkles size={13} strokeWidth={2.5} />
+                  Free forever
+                </span>
+                <span className={styles.badgeSecondary}>
+                  No signup required
+                </span>
+              </div>
               <h1 className={styles.heroTitle}>
-                Build a resume that
-                <span className={styles.heroAccent}> gets you hired.</span>
+                The resume builder
+                <br />
+                <span className={styles.heroAccent}>that actually works.</span>
               </h1>
               <p className={styles.heroSub}>
                 Nine hand-crafted templates, AI writing assistance, ATS checks,
@@ -361,10 +386,11 @@ export default function Landing() {
               <div className={styles.heroActions}>
                 <Link href="/builder" className={styles.primaryCta}>
                   Build my resume — free
-                  <ArrowRight size={17} strokeWidth={2.5} />
+                  <ArrowRight size={18} strokeWidth={2.5} />
                 </Link>
                 <a href="#templates" className={styles.secondaryCta}>
                   Browse templates
+                  <ArrowUpRight size={16} strokeWidth={2.5} />
                 </a>
               </div>
               <div className={styles.heroPoints}>
@@ -378,12 +404,20 @@ export default function Landing() {
                   <Check size={14} strokeWidth={3} /> PDF &amp; Word export
                 </span>
               </div>
+              <div className={styles.platforms}>
+                {PLATFORMS.map((p) => (
+                  <span key={p.label} className={styles.platform}>
+                    <p.icon size={14} strokeWidth={2.2} />
+                    {p.label}
+                  </span>
+                ))}
+              </div>
             </Reveal>
           </div>
 
           <div className={styles.heroVisual}>
             <div className={styles.heroGlow} aria-hidden />
-            <Reveal delay={120}>
+            <Reveal delay={150}>
               <LandingPreview />
             </Reveal>
             <div className={`${styles.heroChip} ${styles.chipTop}`} aria-hidden>
@@ -400,45 +434,46 @@ export default function Landing() {
             </div>
           </div>
         </div>
-
-        <div className={styles.stats}>
-          {STATS.map((s) => (
-            <div key={s.label} className={styles.stat}>
-              <span className={styles.statIcon}>
-                <s.icon size={16} strokeWidth={2.2} />
-              </span>
-              <p className={styles.statNum}>
-                <CountUp value={s.value} suffix={s.suffix} />
-              </p>
-              <p className={styles.statLabel}>{s.label}</p>
-            </div>
-          ))}
-        </div>
       </header>
 
-      {/* ---------- Metrics bar ---------- */}
-      <section className={styles.metricsBar}>
-        {METRICS.map((m) => (
-          <div key={m.label} className={styles.metric}>
-            <span className={styles.metricIcon}>
-              <m.icon size={18} strokeWidth={2.2} />
-            </span>
-            <div>
-              <p className={styles.metricValue}>{m.value}</p>
-              <p className={styles.metricLabel}>{m.label}</p>
-            </div>
+      {/* ---------- Stats ---------- */}
+      <section className={styles.statsSection}>
+        <div className={styles.statsGrid}>
+          <div className={styles.statCard}>
+            <p className={styles.statNum}>
+              <CountUp value={9} />
+            </p>
+            <p className={styles.statLabel}>Resume templates</p>
           </div>
-        ))}
+          <div className={styles.statCard}>
+            <p className={styles.statNum}>
+              <CountUp value={2} />
+            </p>
+            <p className={styles.statLabel}>Cover letter designs</p>
+          </div>
+          <div className={styles.statCard}>
+            <p className={styles.statNum}>
+              <CountUp value={11} />
+            </p>
+            <p className={styles.statLabel}>Typefaces included</p>
+          </div>
+          <div className={styles.statCard}>
+            <p className={styles.statNum}>
+              <CountUp value={1} suffix=" click" />
+            </p>
+            <p className={styles.statLabel}>To PDF export</p>
+          </div>
+        </div>
       </section>
 
-      {/* ---------- Showcases (product-style splits) ---------- */}
+      {/* ---------- Showcases ---------- */}
       <section className={styles.section}>
         <Reveal>
           <div className={styles.showcase}>
             <div className={styles.showcaseCopy}>
               <p className={styles.eyebrow}>AI writing assistant</p>
               <h2 className={styles.sectionTitle}>
-                Let AI do the heavy lifting — then make it yours
+                Let AI do the heavy lifting
               </h2>
               <p className={styles.sectionSub}>
                 Rewrite your summary, sharpen every bullet so it starts with a
@@ -453,7 +488,7 @@ export default function Landing() {
                   <Check size={14} strokeWidth={3} /> Paste a job description and watch the keywords align
                 </li>
                 <li className={styles.showcaseItem}>
-                  <Check size={14} strokeWidth={3} /> BYOK — works with 6+ providers or any OpenAI-compatible API
+                  <Check size={14} strokeWidth={3} /> Works with 6+ providers or any OpenAI-compatible API
                 </li>
               </ul>
             </div>
@@ -466,19 +501,18 @@ export default function Landing() {
 
       <section className={`${styles.section} ${styles.sectionAlt}`}>
         <Reveal>
-          <div className={`${styles.showcase} ${styles.showcaseAlt}`}>
+          <div className={`${styles.showcase} ${styles.showcaseReverse}`}>
             <div className={styles.showcaseVisual}>
               <MatchMock />
             </div>
             <div className={styles.showcaseCopy}>
               <p className={styles.eyebrow}>Job match & ATS</p>
               <h2 className={styles.sectionTitle}>
-                Know your match score before you hit send
+                Know your score before you send
               </h2>
               <p className={styles.sectionSub}>
-                Paste a job description to see covered keywords, the skills on
-                the list you&apos;re missing, and a live 100-point resume review —
-                before a recruiter ever reads it.
+                Paste a job description to see covered keywords, missing skills,
+                and a live 100-point resume review — before a recruiter ever reads it.
               </p>
               <ul className={styles.showcaseList}>
                 <li className={styles.showcaseItem}>
@@ -502,12 +536,11 @@ export default function Landing() {
             <div className={styles.showcaseCopy}>
               <p className={styles.eyebrow}>Export & share</p>
               <h2 className={styles.sectionTitle}>
-                Preview is pixel-perfect. So is the download.
+                Pixel-perfect preview. Pixel-perfect download.
               </h2>
               <p className={styles.sectionSub}>
                 What you see in the live preview is exactly what lands in your
-                PDF. Grab a Word file, copy plain text, or send a public link
-                that renders the resume for anyone.
+                PDF. Grab a Word file, copy plain text, or send a public link.
               </p>
               <ul className={styles.showcaseList}>
                 <li className={styles.showcaseItem}>
@@ -528,7 +561,7 @@ export default function Landing() {
         </Reveal>
       </section>
 
-      {/* ---------- Features grid ---------- */}
+      {/* ---------- Bento features ---------- */}
       <section id="features" className={`${styles.section} ${styles.sectionAlt}`}>
         <div className={styles.sectionHead}>
           <p className={styles.eyebrow}>Everything you need</p>
@@ -540,15 +573,15 @@ export default function Landing() {
             final PDF.
           </p>
         </div>
-        <div className={styles.featureGrid}>
-          {FEATURES.map((f, i) => (
-            <Reveal key={f.title} delay={(i % 3) * 70}>
-              <div className={styles.featureCard}>
-                <span className={styles.featureIcon}>
-                  <f.icon size={20} strokeWidth={2.2} />
+        <div className={styles.bentoGrid}>
+          {BENTO_FEATURES.map((f, i) => (
+            <Reveal key={f.title} delay={(i % 3) * 60}>
+              <div className={`${styles.bentoCard} ${styles[`bento${f.span}`]} ${styles[`bento${f.accent}`]}`}>
+                <span className={styles.bentoIcon}>
+                  <f.icon size={22} strokeWidth={2} />
                 </span>
-                <h3 className={styles.featureTitle}>{f.title}</h3>
-                <p className={styles.featureBody}>{f.body}</p>
+                <h3 className={styles.bentoTitle}>{f.title}</h3>
+                <p className={styles.bentoBody}>{f.body}</p>
               </div>
             </Reveal>
           ))}
@@ -567,7 +600,7 @@ export default function Landing() {
         </div>
         <div className={styles.templateGrid}>
           {TEMPLATES.map((t, i) => (
-            <Reveal key={t.id} delay={(i % 3) * 70}>
+            <Reveal key={t.id} delay={(i % 3) * 60}>
               <Link href={`/builder?template=${t.id}`} className={styles.templateCard}>
                 <GalleryPreview template={t.id} />
                 <div className={styles.templateMeta}>
@@ -601,11 +634,11 @@ export default function Landing() {
         </div>
         <div className={styles.steps}>
           {STEPS.map((s, i) => (
-            <Reveal key={s.title} delay={i * 90}>
+            <Reveal key={s.title} delay={i * 80}>
               <div className={styles.step}>
-                <span className={styles.stepNum}>0{i + 1}</span>
-                <span className={styles.featureIcon}>
-                  <s.icon size={20} strokeWidth={2.2} />
+                <span className={styles.stepNum}>{s.num}</span>
+                <span className={styles.stepIcon}>
+                  <s.icon size={22} strokeWidth={2} />
                 </span>
                 <h3 className={styles.stepTitle}>{s.title}</h3>
                 <p className={styles.stepBody}>{s.body}</p>
@@ -623,14 +656,11 @@ export default function Landing() {
         </div>
         <div className={styles.testimonialGrid}>
           {TESTIMONIALS.map((t, i) => (
-            <Reveal key={t.name} delay={i * 90}>
+            <Reveal key={t.name} delay={i * 80}>
               <figure className={styles.testimonial}>
-                <span className={styles.testiQuote}>
-                  <Quote size={20} strokeWidth={2.2} />
-                </span>
-                <div className={styles.testiStars} aria-label="5 out of 5 stars">
-                  {Array.from({ length: 5 }).map((_, s) => (
-                    <Star key={s} size={13} strokeWidth={2.4} fill="currentColor" />
+                <div className={styles.testiStars} aria-label={`${t.rating} out of 5 stars`}>
+                  {Array.from({ length: t.rating }).map((_, s) => (
+                    <Star key={s} size={14} strokeWidth={2.4} fill="currentColor" />
                   ))}
                 </div>
                 <blockquote className={styles.testiQuoteText}>{t.quote}</blockquote>
@@ -667,19 +697,25 @@ export default function Landing() {
       </section>
 
       {/* ---------- CTA ---------- */}
-      <section className={styles.ctaBanner}>
-        <Reveal>
-          <h2 className={styles.ctaTitle}>
-            Your next role is one great resume away.
-          </h2>
-          <p className={styles.ctaSub}>
-            Start free. No account, no credit card, no watermark.
-          </p>
-          <Link href="/builder" className={styles.primaryCta}>
-            Build my resume now
-            <ArrowRight size={17} strokeWidth={2.5} />
-          </Link>
-        </Reveal>
+      <section className={styles.ctaSection}>
+        <div className={styles.ctaBanner}>
+          <div className={styles.ctaOrbs} aria-hidden>
+            <div className={styles.ctaOrb1} />
+            <div className={styles.ctaOrb2} />
+          </div>
+          <Reveal>
+            <h2 className={styles.ctaTitle}>
+              Your next role is one great resume away.
+            </h2>
+            <p className={styles.ctaSub}>
+              Start free. No account, no credit card, no watermark.
+            </p>
+            <Link href="/builder" className={styles.ctaBtn}>
+              Build my resume now
+              <ArrowRight size={18} strokeWidth={2.5} />
+            </Link>
+          </Reveal>
+        </div>
       </section>
 
       {/* ---------- Footer ---------- */}
