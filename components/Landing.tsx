@@ -13,10 +13,8 @@ import {
   Link2,
   Mail,
   PenLine,
-  Quote,
   ShieldCheck,
   Sparkles,
-  Star,
   Target,
   Zap,
   Users,
@@ -264,31 +262,17 @@ const STEPS = [
   },
 ];
 
-const TESTIMONIALS = [
-  {
-    quote:
-      "I went from weeks of silence to two interviews in the first week after switching. The ATS checklist caught placeholders I'd been missing for years.",
-    name: "Dana K.",
-    role: "Product Manager",
-    initials: "DK",
-    rating: 5,
-  },
-  {
-    quote:
-      "The AI bullet rewrites are shockingly good. Paste a job description, hit 'tailor', and done — every bullet starts with a strong verb.",
-    name: "Marcus T.",
-    role: "Software Engineer",
-    initials: "MT",
-    rating: 5,
-  },
-  {
-    quote:
-      "Resume, cover letter, and PDF — start to finish in under an hour. And the templates genuinely fit one page, which nothing else managed.",
-    name: "Priya S.",
-    role: "Marketing Lead",
-    initials: "PS",
-    rating: 5,
-  },
+const COMPARISON = [
+  { feature: "Free templates", us: true, them: "3-5 only" },
+  { feature: "AI writing assistant", us: true, them: "Paid only" },
+  { feature: "ATS checker", us: true, them: false },
+  { feature: "Job match scoring", us: true, them: false },
+  { feature: "PDF export", us: true, them: "Watermark" },
+  { feature: "Word export", us: true, them: "Paid only" },
+  { feature: "Cover letters", us: true, them: "Paid only" },
+  { feature: "No account required", us: true, them: false },
+  { feature: "Cloud sync", us: true, them: true },
+  { feature: "Privacy-first", us: true, them: false },
 ];
 
 const FAQS = [
@@ -648,31 +632,41 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ---------- Testimonials ---------- */}
+      {/* ---------- Comparison ---------- */}
       <section className={styles.section}>
         <div className={styles.sectionHead}>
-          <p className={styles.eyebrow}>Loved by job seekers</p>
-          <h2 className={styles.sectionTitle}>People who landed the interview</h2>
+          <p className={styles.eyebrow}>Why choose us</p>
+          <h2 className={styles.sectionTitle}>Built different than the rest</h2>
+          <p className={styles.sectionSub}>
+            Most resume builders lock features behind paywalls. We don&apos;t.
+          </p>
         </div>
-        <div className={styles.testimonialGrid}>
-          {TESTIMONIALS.map((t, i) => (
-            <Reveal key={t.name} delay={i * 80}>
-              <figure className={styles.testimonial}>
-                <div className={styles.testiStars} aria-label={`${t.rating} out of 5 stars`}>
-                  {Array.from({ length: t.rating }).map((_, s) => (
-                    <Star key={s} size={14} strokeWidth={2.4} fill="currentColor" />
-                  ))}
-                </div>
-                <blockquote className={styles.testiQuoteText}>{t.quote}</blockquote>
-                <figcaption className={styles.testiAuthor}>
-                  <span className={styles.testiAvatar}>{t.initials}</span>
-                  <span>
-                    <span className={styles.testiName}>{t.name}</span>
-                    <span className={styles.testiRole}>{t.role}</span>
-                  </span>
-                </figcaption>
-              </figure>
-            </Reveal>
+        <div className={styles.comparisonTable}>
+          <div className={styles.comparisonHeader}>
+            <span className={styles.comparisonFeature}>Feature</span>
+            <span className={styles.comparisonUs}>Resume Builder</span>
+            <span className={styles.comparisonThem}>Others</span>
+          </div>
+          {COMPARISON.map((row) => (
+            <div key={row.feature} className={styles.comparisonRow}>
+              <span className={styles.comparisonFeature}>{row.feature}</span>
+              <span className={styles.comparisonUs}>
+                {row.us === true ? (
+                  <Check size={16} strokeWidth={3} className={styles.checkGreen} />
+                ) : (
+                  row.us
+                )}
+              </span>
+              <span className={styles.comparisonThem}>
+                {row.them === true ? (
+                  <Check size={16} strokeWidth={3} />
+                ) : row.them === false ? (
+                  <span className={styles.cross}>—</span>
+                ) : (
+                  row.them
+                )}
+              </span>
+            </div>
           ))}
         </div>
       </section>
