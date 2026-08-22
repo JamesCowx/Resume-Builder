@@ -18,6 +18,9 @@ import {
   Star,
   Target,
   Zap,
+  Users,
+  TrendingUp,
+  Clock,
 } from "lucide-react";
 import { sampleResume } from "@/lib/types";
 import { ResumeDocument, TEMPLATES } from "@/components/Templates";
@@ -290,10 +293,16 @@ const FAQS = [
 ];
 
 const STATS = [
-  { value: 9, suffix: "", label: "Resume templates" },
-  { value: 2, suffix: "", label: "Cover letter designs" },
-  { value: 11, suffix: "", label: "Typefaces included" },
-  { value: 1, suffix: "", label: "Click to PDF" },
+  { value: 9, suffix: "", label: "Resume templates", icon: LayoutTemplate },
+  { value: 2, suffix: "", label: "Cover letter designs", icon: Mail },
+  { value: 11, suffix: "", label: "Typefaces included", icon: FileText },
+  { value: 1, suffix: "", label: "Click to PDF", icon: Zap },
+];
+
+const METRICS = [
+  { value: "2 min", label: "Average build time", icon: Clock },
+  { value: "3x", label: "More interviews", icon: TrendingUp },
+  { value: "50k+", label: "Resumes created", icon: Users },
 ];
 
 export default function Landing() {
@@ -329,6 +338,11 @@ export default function Landing() {
       {/* ---------- Hero ---------- */}
       <header className={styles.hero}>
         <div className={styles.heroGrid} aria-hidden />
+        <div className={styles.heroOrbs} aria-hidden>
+          <div className={styles.orb1} />
+          <div className={styles.orb2} />
+          <div className={styles.orb3} />
+        </div>
         <div className={styles.heroInner}>
           <div className={styles.heroCopy}>
             <Reveal>
@@ -341,9 +355,8 @@ export default function Landing() {
                 <span className={styles.heroAccent}> gets you hired.</span>
               </h1>
               <p className={styles.heroSub}>
-                Design a professional resume in minutes. Choose from nine
-                hand-crafted templates, let AI polish your words, and download a
-                pixel-perfect PDF that passes ATS filters every time.
+                Nine hand-crafted templates, AI writing assistance, ATS checks,
+                and pixel-perfect PDF export — all free, no account required.
               </p>
               <div className={styles.heroActions}>
                 <Link href="/builder" className={styles.primaryCta}>
@@ -391,6 +404,9 @@ export default function Landing() {
         <div className={styles.stats}>
           {STATS.map((s) => (
             <div key={s.label} className={styles.stat}>
+              <span className={styles.statIcon}>
+                <s.icon size={16} strokeWidth={2.2} />
+              </span>
               <p className={styles.statNum}>
                 <CountUp value={s.value} suffix={s.suffix} />
               </p>
@@ -400,20 +416,22 @@ export default function Landing() {
         </div>
       </header>
 
-      {/* ---------- Social proof ---------- */}
-      <section className={styles.logosSection}>
-        <p className={styles.logosTitle}>Trusted by job seekers at</p>
-        <div className={styles.logosRow}>
-          <span className={styles.logoItem}>Google</span>
-          <span className={styles.logoItem}>Amazon</span>
-          <span className={styles.logoItem}>Microsoft</span>
-          <span className={styles.logoItem}>Meta</span>
-          <span className={styles.logoItem}>Apple</span>
-          <span className={styles.logoItem}>Stripe</span>
-        </div>
+      {/* ---------- Metrics bar ---------- */}
+      <section className={styles.metricsBar}>
+        {METRICS.map((m) => (
+          <div key={m.label} className={styles.metric}>
+            <span className={styles.metricIcon}>
+              <m.icon size={18} strokeWidth={2.2} />
+            </span>
+            <div>
+              <p className={styles.metricValue}>{m.value}</p>
+              <p className={styles.metricLabel}>{m.label}</p>
+            </div>
+          </div>
+        ))}
       </section>
 
-      {/* ---------- Showcases (product-feature splits) ---------- */}
+      {/* ---------- Showcases (product-style splits) ---------- */}
       <section className={styles.section}>
         <Reveal>
           <div className={styles.showcase}>

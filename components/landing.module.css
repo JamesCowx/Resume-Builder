@@ -144,6 +144,66 @@
   100% { opacity: 1; }
 }
 
+.heroOrbs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.orb1,
+.orb2,
+.orb3 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+}
+
+.orb1 {
+  width: 500px;
+  height: 500px;
+  background: var(--brand);
+  top: -10%;
+  right: 10%;
+  animation: orbFloat1 12s ease-in-out infinite;
+}
+
+.orb2 {
+  width: 400px;
+  height: 400px;
+  background: #7c3aed;
+  bottom: 10%;
+  left: 5%;
+  animation: orbFloat2 15s ease-in-out infinite;
+}
+
+.orb3 {
+  width: 300px;
+  height: 300px;
+  background: #06b6d4;
+  top: 40%;
+  right: 30%;
+  animation: orbFloat3 10s ease-in-out infinite;
+}
+
+@keyframes orbFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 15px) scale(0.95); }
+}
+
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-25px, 20px) scale(1.08); }
+  66% { transform: translate(15px, -25px) scale(0.92); }
+}
+
+@keyframes orbFloat3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, -30px) scale(1.1); }
+}
+
 .heroGrid {
   position: absolute;
   inset: 0;
@@ -503,6 +563,59 @@
 .statLabel {
   font-size: 13px;
   font-weight: 600;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.statIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--brand-soft);
+  color: var(--brand);
+  display: grid;
+  place-items: center;
+  margin: 0 auto 8px;
+}
+
+/* ================= Metrics bar ================= */
+
+.metricsBar {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  padding: 32px clamp(20px, 5vw, 56px);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.metric {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.metricIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--brand-soft), color-mix(in srgb, var(--brand) 10%, transparent));
+  color: var(--brand);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.metricValue {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0;
+}
+
+.metricLabel {
+  font-size: 13px;
   color: var(--text-muted);
   margin: 0;
 }
@@ -1605,6 +1718,14 @@
   .heroGrid {
     display: none;
   }
+  .metricsBar {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  .orb1, .orb2, .orb3 {
+    opacity: 0.15;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1613,7 +1734,10 @@
   .previewCanvas,
   .matchRing,
   .badge,
-  .ctaBanner {
+  .ctaBanner,
+  .orb1,
+  .orb2,
+  .orb3 {
     animation: none;
     transform: none;
   }
