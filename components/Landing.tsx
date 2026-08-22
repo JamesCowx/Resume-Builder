@@ -27,7 +27,6 @@ import {
 import { sampleResume } from "@/lib/types";
 import { ResumeDocument, TEMPLATES } from "@/components/Templates";
 import type { TemplateId } from "@/components/Templates";
-import LandingPreview from "./LandingPreview";
 import CountUp from "./CountUp";
 import Reveal from "./Reveal";
 import styles from "./landing.module.css";
@@ -397,25 +396,6 @@ export default function Landing() {
                 ))}
               </div>
             </Reveal>
-          </div>
-
-          <div className={styles.heroVisual}>
-            <div className={styles.heroGlow} aria-hidden />
-            <Reveal delay={150}>
-              <LandingPreview />
-            </Reveal>
-            <div className={`${styles.heroChip} ${styles.chipTop}`} aria-hidden>
-              <span className={styles.chipIcon}>
-                <FileCheck size={14} strokeWidth={2.4} />
-              </span>
-              ATS score 92/100
-            </div>
-            <div className={`${styles.heroChip} ${styles.chipBottom}`} aria-hidden>
-              <span className={styles.chipIcon}>
-                <FileDown size={14} strokeWidth={2.4} />
-              </span>
-              PDF downloaded
-            </div>
           </div>
         </div>
       </header>
