@@ -1,6 +1,9 @@
 .app {
   min-height: 100vh;
+  background: var(--bg);
 }
+
+/* ================= Toolbar ================= */
 
 .toolbar {
   position: sticky;
@@ -8,40 +11,41 @@
   z-index: 20;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 10px 20px 12px;
-  background: color-mix(in srgb, var(--surface) 78%, transparent);
-  backdrop-filter: blur(14px) saturate(1.4);
-  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  gap: 8px;
+  padding: 8px 16px 10px;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(16px) saturate(1.5);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
   border-bottom: 1px solid var(--border);
 }
 
 .toolbarRow {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
 }
 
 .docSelect {
-  min-width: 180px;
-  max-width: 240px;
+  min-width: 160px;
+  max-width: 220px;
 }
 
 .docBtn {
   font-family: inherit;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-muted);
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 8px 11px;
+  border-radius: 8px;
+  padding: 6px 10px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s;
+  gap: 5px;
+  transition: all 0.15s;
+  white-space: nowrap;
 }
 
 .docBtn:hover {
@@ -62,24 +66,26 @@
 
 .docDivider {
   width: 1px;
-  height: 22px;
+  height: 20px;
   background: var(--border);
+  margin: 0 2px;
 }
 
 .aiButton {
   font-family: inherit;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--purple);
   background: var(--purple-soft);
   border: 1px solid var(--purple-border);
-  border-radius: var(--radius-md);
-  padding: 9px 14px;
+  border-radius: 8px;
+  padding: 7px 12px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  transition: all 0.15s;
+  white-space: nowrap;
 }
 
 .aiButton:hover {
@@ -92,10 +98,11 @@
 }
 
 .aiButtonDot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--purple-border);
+  flex-shrink: 0;
 }
 
 .aiButtonConfigured .aiButtonDot {
@@ -106,18 +113,19 @@
 .overflowChip {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 11.5px;
+  gap: 5px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--amber);
   background: var(--amber-soft);
   border: 1px solid var(--amber-border);
-  border-radius: var(--radius-pill);
-  padding: 3px 12px;
+  border-radius: 999px;
+  padding: 3px 10px;
+  white-space: nowrap;
 }
 
 .savedIndicator {
-  font-size: 11.5px;
+  font-size: 11px;
   color: var(--text-faint);
   white-space: nowrap;
 }
@@ -125,27 +133,29 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   margin-right: 4px;
+  text-decoration: none;
 }
 
 .logo {
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--brand), #60a5fa);
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--brand);
   color: #fff;
   display: grid;
   place-items: center;
   font-weight: 800;
-  font-size: 15px;
-  box-shadow: 0 3px 10px var(--brand-ring);
+  font-size: 14px;
+  flex-shrink: 0;
 }
 
 .brandName {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--text);
+  white-space: nowrap;
 }
 
 .brandName span {
@@ -155,32 +165,35 @@
 
 .toolbarSpacer {
   flex: 1;
+  min-width: 0;
 }
 
 .toolbarGroup {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .toolbarLabel {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--text-faint);
+  white-space: nowrap;
 }
 
 .select {
   font-family: inherit;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text);
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 8px 10px;
+  border-radius: 8px;
+  padding: 6px 8px;
   cursor: pointer;
   outline: none;
   transition: border-color 0.15s, box-shadow 0.15s;
+  max-width: 160px;
 }
 
 .select:focus {
@@ -190,22 +203,23 @@
 
 .swatches {
   display: flex;
-  gap: 6px;
+  gap: 4px;
 }
 
 .swatch {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   border: 2px solid var(--surface);
   box-shadow: 0 0 0 1px var(--border-strong);
   cursor: pointer;
   padding: 0;
   transition: transform 0.12s, box-shadow 0.12s;
+  flex-shrink: 0;
 }
 
 .swatch:hover {
-  transform: scale(1.15);
+  transform: scale(1.2);
 }
 
 .swatchActive {
@@ -214,18 +228,19 @@
 
 .textBtn {
   font-family: inherit;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-muted);
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 8px 12px;
+  border-radius: 8px;
+  padding: 6px 10px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s;
+  gap: 5px;
+  transition: all 0.15s;
+  white-space: nowrap;
 }
 
 .textBtn:hover:not(:disabled) {
@@ -239,54 +254,59 @@
 }
 
 .textBtn:disabled {
-  opacity: 0.4;
+  opacity: 0.35;
   cursor: default;
 }
 
 .primaryBtn {
   font-family: inherit;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   color: #fff;
-  background: linear-gradient(135deg, var(--brand), var(--brand-hover));
+  background: var(--brand);
   border: none;
-  border-radius: var(--radius-md);
-  padding: 9px 18px;
+  border-radius: 8px;
+  padding: 7px 14px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  transition: filter 0.15s, transform 0.12s, box-shadow 0.15s;
-  box-shadow: 0 3px 12px var(--brand-ring);
+  gap: 6px;
+  transition: all 0.15s;
+  box-shadow: 0 2px 8px var(--brand-ring);
+  white-space: nowrap;
 }
 
 .primaryBtn:hover:not(:disabled) {
-  filter: brightness(1.08);
-  box-shadow: 0 5px 18px var(--brand-ring);
+  background: var(--brand-hover);
+  box-shadow: 0 4px 14px var(--brand-ring);
+  transform: translateY(-1px);
 }
 
 .primaryBtn:active:not(:disabled) {
-  transform: translateY(1px);
+  transform: translateY(0);
 }
 
 .primaryBtn:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: default;
+  transform: none;
+  box-shadow: none;
 }
 
 .iconBtnGhost {
-  width: 34px;
-  height: 34px;
-  border-radius: var(--radius-md);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--text-muted);
-  font-size: 15px;
+  font-size: 14px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  transition: all 0.15s;
+  flex-shrink: 0;
 }
 
 .iconBtnGhost:hover {
@@ -295,26 +315,29 @@
   border-color: var(--border-strong);
 }
 
+/* ================= Workspace ================= */
+
 .workspace {
   display: grid;
-  grid-template-columns: minmax(360px, 470px) 1fr;
-  gap: 24px;
-  max-width: 1560px;
+  grid-template-columns: minmax(340px, 460px) 1fr;
+  gap: 20px;
+  max-width: 1500px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 20px;
   align-items: start;
 }
 
 .formCol {
   overflow: visible;
+  min-width: 0;
 }
 
 .previewCol {
   position: sticky;
-  top: 92px;
+  top: 88px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   min-width: 0;
 }
 
@@ -322,11 +345,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
 }
 
 .previewLabel {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -336,16 +359,16 @@
 .zoomGroup {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-  padding: 4px;
+  border-radius: 999px;
+  padding: 3px;
 }
 
 .zoomBtn {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   border: none;
   background: transparent;
@@ -354,7 +377,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s, color 0.15s;
+  transition: all 0.15s;
 }
 
 .zoomBtn:hover {
@@ -363,9 +386,9 @@
 }
 
 .zoomLabel {
-  min-width: 42px;
+  min-width: 38px;
   text-align: center;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--text-muted);
   font-variant-numeric: tabular-nums;
@@ -375,10 +398,10 @@
   width: 100%;
   background: var(--surface-2);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 20px;
+  border-radius: 12px;
+  padding: 16px;
   overflow: auto;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
 }
 
 .scaledWrap {
@@ -389,40 +412,41 @@
 
 .scaled {
   transform-origin: top left;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.2);
-  border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
   overflow: hidden;
 }
 
-/* Review panel */
+/* ================= Review panel ================= */
+
 .review {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 16px 18px;
+  border-radius: 12px;
+  padding: 14px 16px;
   box-shadow: var(--shadow-xs);
 }
 
 .reviewHeader {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   cursor: pointer;
   user-select: none;
 }
 
 .reviewTitle {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--text);
   margin: 0;
 }
 
 .scoreBadge {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 800;
-  padding: 3px 12px;
-  border-radius: var(--radius-pill);
+  padding: 2px 10px;
+  border-radius: 999px;
   color: #fff;
   font-variant-numeric: tabular-nums;
 }
@@ -441,37 +465,37 @@
 
 .reviewHint {
   margin-left: auto;
-  font-size: 11.5px;
+  font-size: 11px;
   color: var(--text-faint);
 }
 
 .reviewBody {
-  margin-top: 14px;
+  margin-top: 12px;
   border-top: 1px solid var(--border-subtle);
-  padding-top: 12px;
+  padding-top: 10px;
 }
 
 .reviewList {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .reviewItem {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: flex-start;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-muted);
-  line-height: 1.45;
+  line-height: 1.4;
 }
 
 .reviewDot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  margin-top: 5px;
+  margin-top: 4px;
   flex-shrink: 0;
 }
 
@@ -488,25 +512,26 @@
 }
 
 .reviewEmpty {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--green);
   font-weight: 600;
 }
 
-/* Toast */
+/* ================= Toast ================= */
+
 .toastWrap {
   position: fixed;
-  bottom: 28px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 200;
-  animation: toastIn 0.22s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+  animation: toastIn 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.2);
 }
 
 @keyframes toastIn {
   from {
     opacity: 0;
-    transform: translateX(-50%) translateY(12px);
+    transform: translateX(-50%) translateY(10px);
   }
   to {
     opacity: 1;
@@ -515,17 +540,18 @@
 }
 
 .toast {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text);
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-  padding: 11px 20px;
+  border-radius: 999px;
+  padding: 10px 18px;
   box-shadow: var(--shadow-lg);
   display: flex;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
 }
 
 .toastError {
@@ -534,11 +560,40 @@
   color: var(--red);
 }
 
+/* ================= Responsive ================= */
+
 @media (max-width: 1100px) {
   .workspace {
     grid-template-columns: 1fr;
   }
   .previewCol {
     position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .toolbar {
+    padding: 6px 12px 8px;
+  }
+  .toolbarRow {
+    gap: 4px;
+  }
+  .docBtn,
+  .textBtn,
+  .aiButton,
+  .primaryBtn {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+  .select {
+    font-size: 11px;
+    padding: 5px 6px;
+  }
+  .workspace {
+    padding: 12px;
+    gap: 12px;
+  }
+  .previewViewport {
+    padding: 10px;
   }
 }
