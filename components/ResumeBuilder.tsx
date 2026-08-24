@@ -874,7 +874,23 @@ export default function ResumeBuilder({
       URL.revokeObjectURL(url);
       showToast("PDF downloaded");
     } catch (e) {
-      showToast(e instanceof Error ? e.message : "Could not generate the PDF.", true);
+      // Fallback: open print page in new window for browser print-to-PDF
+      try {
+        const printRes = await fetch("/api/share", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(handleRequestBody()),
+        });
+        if (printRes.ok) {
+          const { id } = await printRes.json();
+          window.open(`/s/${id}`, "_blank");
+          showToast("Opened in new tab — use Ctrl+P to save as PDF");
+        } else {
+          showToast(e instanceof Error ? e.message : "Could not generate the PDF.", true);
+        }
+      } catch {
+        showToast(e instanceof Error ? e.message : "Could not generate the PDF.", true);
+      }
     } finally {
       setPdfBusy(false);
     }
