@@ -193,7 +193,10 @@ const ensureDocs = (): StoredDoc[] => {
     const raw = window.localStorage.getItem("resume-builder:docs");
     if (raw) {
       const list = JSON.parse(raw) as StoredDoc[];
-      if (Array.isArray(list) && list.length) return list.map(normalizeDoc).filter(Boolean) as StoredDoc[];
+      if (Array.isArray(list) && list.length) {
+        const valid = list.map(normalizeDoc).filter(Boolean) as StoredDoc[];
+        if (valid.length) return valid;
+      }
     }
   } catch {
     // ignore
@@ -640,12 +643,15 @@ export default function ResumeBuilder({
       commit(() => emptyResume());
       updateActive({ name: "My Resume" });
       showToast("Started a blank resume — type your details below");
+      markOnboarded();
     } else if (choice === "sample") {
       showToast("Sample resume loaded — edit anything, or pick a template");
+      markOnboarded();
     } else {
       importRef.current?.click();
+      // Don't mark as onboarded yet — let the file input onChange handle it
+      // If user cancels, they'll see onboarding again on next visit
     }
-    markOnboarded();
   };
 
   // Auth + cloud sync
@@ -1000,6 +1006,8 @@ export default function ResumeBuilder({
               .filter(Boolean)
           );
         showToast("AI update applied");
+      } else {
+        showToast("AI returned an empty response — try again", true);
       }
     } catch (e) {
       const msg = e instanceof Error ? e.message : "AI request failed";

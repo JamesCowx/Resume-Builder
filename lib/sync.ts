@@ -1,9 +1,14 @@
 export type AuthUser = { id: string; email: string };
 
 export async function fetchMe(): Promise<AuthUser | null> {
-  const res = await fetch("/api/auth/me", { cache: "no-store" });
-  const json = await res.json().catch(() => ({ user: null }));
-  return json.user ?? null;
+  try {
+    const res = await fetch("/api/auth/me", { cache: "no-store" });
+    if (!res.ok) return null;
+    const json = await res.json().catch(() => ({ user: null }));
+    return json.user ?? null;
+  } catch {
+    return null;
+  }
 }
 
 export async function login(email: string, password: string): Promise<AuthUser> {
