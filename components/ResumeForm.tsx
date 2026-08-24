@@ -248,16 +248,20 @@ export default function ResumeForm({
     end: string,
     onChange: (key: "start" | "end", value: string) => void
   ) => (
-    <Field
-      label="Dates"
-      value={`${start} – ${end}`}
-      onChange={(v) => {
-        const [s = "", e = ""] = v.split("–").map((x) => x.trim());
-        onChange("start", s);
-        onChange("end", e);
-      }}
-      placeholder="Jan 2022 – Present"
-    />
+    <div className={styles.datesRow}>
+      <Field
+        label="Start date"
+        value={start}
+        onChange={(v) => onChange("start", v)}
+        placeholder="Jan 2022"
+      />
+      <Field
+        label="End date"
+        value={end}
+        onChange={(v) => onChange("end", v)}
+        placeholder="Present"
+      />
+    </div>
   );
 
   return (

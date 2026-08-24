@@ -90,6 +90,13 @@
   gap: 12px;
 }
 
+.datesRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  grid-column: 1 / -1;
+}
+
 .gridFull {
   grid-column: 1 / -1;
 }
