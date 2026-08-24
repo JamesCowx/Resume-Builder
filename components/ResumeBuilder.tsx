@@ -566,27 +566,73 @@ export default function ResumeBuilder({
 
   const handleImport = async (file: File | undefined) => {
     if (!file) return;
-    try {
-      const text = await file.text();
-      const json = JSON.parse(text);
-      const raw = Array.isArray(json) ? json : Array.isArray(json.docs) ? json.docs : null;
-      if (!raw) throw new Error("Invalid format");
-      const valid = raw.map(sanitizeDoc).filter(Boolean) as StoredDoc[];
-      if (!valid.length) throw new Error("No valid resumes in file");
-      setDocs((prev) => {
-        const ids = new Set(prev.map((d) => d.id));
-        const merged = [...prev];
-        for (const d of valid) {
-          if (ids.has(d.id)) continue;
-          ids.add(d.id);
-          merged.push(d);
-        }
-        return merged;
-      });
-      showToast(`Imported ${valid.length} resume(s)`);
-    } catch {
-      showToast("Import failed — not a valid backup file", true);
+    const name = file.name.toLowerCase();
+
+    // JSON backup import
+    if (name.endsWith(".json")) {
+      try {
+        const text = await file.text();
+        const json = JSON.parse(text);
+        const raw = Array.isArray(json) ? json : Array.isArray(json.docs) ? json.docs : null;
+        if (!raw) throw new Error("Invalid format");
+        const valid = raw.map(sanitizeDoc).filter(Boolean) as StoredDoc[];
+        if (!valid.length) throw new Error("No valid resumes in file");
+        setDocs((prev) => {
+          const ids = new Set(prev.map((d) => d.id));
+          const merged = [...prev];
+          for (const d of valid) {
+            if (ids.has(d.id)) continue;
+            ids.add(d.id);
+            merged.push(d);
+          }
+          return merged;
+        });
+        showToast(`Imported ${valid.length} resume(s)`);
+      } catch {
+        showToast("Import failed — not a valid backup file", true);
+      }
+      return;
     }
+
+    // PDF/DOCX/TXT import
+    if (name.endsWith(".pdf") || name.endsWith(".docx") || name.endsWith(".txt")) {
+      try {
+        const formData = new FormData();
+        formData.append("file", file);
+        const res = await fetch("/api/import", { method: "POST", body: formData });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(json.error || "Import failed");
+
+        const parsed = json.parsed;
+        if (parsed) {
+          commit((d) => ({
+            ...d,
+            personal: {
+              ...d.personal,
+              fullName: parsed.name || d.personal.fullName,
+              email: parsed.email || d.personal.email,
+              phone: parsed.phone || d.personal.phone,
+              summary: parsed.summary || d.personal.summary,
+            },
+            skills: parsed.skills
+              ? parsed.skills.split(",").map((s: string) => s.trim()).filter(Boolean)
+              : d.skills,
+          }));
+          showToast("Resume imported — review and edit the extracted content");
+        } else {
+          showToast("Could not parse resume structure — text pasted as summary");
+          commit((d) => ({
+            ...d,
+            personal: { ...d.personal, summary: json.text?.slice(0, 500) || "" },
+          }));
+        }
+      } catch (e) {
+        showToast(e instanceof Error ? e.message : "Import failed", true);
+      }
+      return;
+    }
+
+    showToast("Unsupported file type — use JSON, PDF, DOCX, or TXT", true);
   };
 
   // Hydrate from localStorage after mount (client-only) — keeps the initial
@@ -1183,18 +1229,18 @@ export default function ResumeBuilder({
             <input
               ref={importRef}
               type="file"
-              accept=".json"
+              accept=".json,.pdf,.docx,.txt"
               hidden
               onChange={(e) => {
                 handleImport(e.target.files?.[0]);
                 e.target.value = "";
               }}
-              aria-label="Import resumes backup"
+              aria-label="Import resume or backup"
             />
             <button
               className={styles.textBtn}
               onClick={() => importRef.current?.click()}
-              title="Import a JSON backup"
+              title="Import a resume (PDF, DOCX, TXT) or JSON backup"
             >
               <FolderInput size={15} strokeWidth={2.4} />
               Import
