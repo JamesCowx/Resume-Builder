@@ -1,48 +1,48 @@
 :root {
-  /* Brand - Red */
-  --brand: #ef4444;
-  --brand-hover: #f87171;
-  --brand-soft: rgba(239, 68, 68, 0.12);
-  --brand-ring: rgba(239, 68, 68, 0.25);
+  /* Brand */
+  --brand: #2563eb;
+  --brand-hover: #1d4ed8;
+  --brand-soft: rgba(37, 99, 235, 0.1);
+  --brand-ring: rgba(37, 99, 235, 0.2);
 
-  /* Surfaces - Dark */
-  --bg: #000000;
-  --bg-grad-a: #000000;
-  --bg-grad-b: #0a0a0a;
-  --surface: #0a0a0a;
-  --surface-2: #111111;
-  --surface-3: #1a1a1a;
-  --surface-hover: #1a1a1a;
+  /* Surfaces */
+  --bg: #ffffff;
+  --bg-grad-a: #f8fafc;
+  --bg-grad-b: #f1f5f9;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --surface-3: #f1f5f9;
+  --surface-hover: #f1f5f9;
 
   /* Borders */
-  --border: #1a1a1a;
-  --border-strong: #2a2a2a;
-  --border-subtle: #111111;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --border-subtle: #f1f5f9;
 
   /* Text */
-  --text: #fafafa;
-  --text-muted: #a1a1aa;
-  --text-faint: #71717a;
+  --text: #0f172a;
+  --text-muted: #475569;
+  --text-faint: #94a3b8;
 
   /* Status */
-  --green: #22c55e;
-  --green-soft: rgba(34, 197, 94, 0.12);
-  --green-border: rgba(34, 197, 94, 0.3);
-  --amber: #f59e0b;
-  --amber-soft: rgba(245, 158, 11, 0.12);
-  --amber-border: rgba(245, 158, 11, 0.3);
-  --red: #ef4444;
-  --red-soft: rgba(239, 68, 68, 0.12);
-  --red-border: rgba(239, 68, 68, 0.3);
-  --purple: #a855f7;
-  --purple-soft: rgba(168, 85, 247, 0.12);
-  --purple-border: rgba(168, 85, 247, 0.3);
+  --green: #059669;
+  --green-soft: rgba(5, 150, 105, 0.1);
+  --green-border: rgba(5, 150, 105, 0.25);
+  --amber: #d97706;
+  --amber-soft: rgba(217, 119, 6, 0.1);
+  --amber-border: rgba(217, 119, 6, 0.25);
+  --red: #dc2626;
+  --red-soft: rgba(220, 38, 38, 0.1);
+  --red-border: rgba(220, 38, 38, 0.25);
+  --purple: #7c3aed;
+  --purple-soft: rgba(124, 58, 237, 0.1);
+  --purple-border: rgba(124, 58, 237, 0.25);
 
   /* Shadows */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.5);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 12px 34px rgba(0, 0, 0, 0.6);
-  --shadow-lg: 0 26px 70px rgba(0, 0, 0, 0.7);
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.07);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.15);
 
   /* Radii */
   --radius-sm: 8px;
@@ -51,7 +51,7 @@
   --radius-xl: 20px;
   --radius-pill: 999px;
 
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html[data-theme="dark"] {
