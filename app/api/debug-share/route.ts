@@ -10,7 +10,16 @@ export async function GET(req: NextRequest) {
   
   try {
     const share = await getShare(id);
-    return NextResponse.json({ found: !!share, share });
+    if (!share) return NextResponse.json({ found: false });
+    return NextResponse.json({
+      found: true,
+      id: share.id,
+      kind: share.kind,
+      name: share.name,
+      payloadType: typeof share.payload,
+      payloadLength: typeof share.payload === "string" ? share.payload.length : "N/A",
+      payloadStart: typeof share.payload === "string" ? share.payload.substring(0, 100) : String(share.payload).substring(0, 100),
+    });
   } catch (e) {
     return NextResponse.json({ error: e instanceof Error ? e.message : "Unknown" }, { status: 500 });
   }
