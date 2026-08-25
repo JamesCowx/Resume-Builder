@@ -901,47 +901,21 @@ export default function ResumeBuilder({
 
   const handleDownloadPDF = async () => {
     setPdfBusy(true);
-    const baseName = isCover
-      ? cover.senderName || active.name || "cover-letter"
-      : data.personal.fullName || active.name || "resume";
     try {
       const res = await fetch("/api/pdf", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(handleRequestBody()),
       });
-      if (!res.ok) {
-        const json = await res.json().catch(() => ({}));
-        throw new Error(json.error || "PDF generation failed.");
-      }
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${baseName.replace(/[^\w\s-]/g, "").trim().replace(/\s+/g, "-") || "document"}.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-      showToast("PDF downloaded");
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(json.error || "Could not create PDF link.");
+      
+      // Open the share page in a new tab — user can print to PDF from there
+      const shareUrl = `${window.location.origin}/s/${json.id}`;
+      window.open(shareUrl, "_blank");
+      showToast("Opened in new tab — press Ctrl+P to save as PDF");
     } catch (e) {
-      // Fallback: open print page in new window for browser print-to-PDF
-      try {
-        const printRes = await fetch("/api/share", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(handleRequestBody()),
-        });
-        if (printRes.ok) {
-          const { id } = await printRes.json();
-          window.open(`/s/${id}`, "_blank");
-          showToast("Opened in new tab — use Ctrl+P to save as PDF");
-        } else {
-          showToast(e instanceof Error ? e.message : "Could not generate the PDF.", true);
-        }
-      } catch {
-        showToast(e instanceof Error ? e.message : "Could not generate the PDF.", true);
-      }
+      showToast(e instanceof Error ? e.message : "Could not generate PDF.", true);
     } finally {
       setPdfBusy(false);
     }

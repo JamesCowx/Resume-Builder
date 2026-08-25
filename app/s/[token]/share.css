@@ -142,3 +142,38 @@ body {
 .shareEmptyCta:hover {
   filter: brightness(1.08);
 }
+
+/* Print styles — hide everything except the resume sheet */
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+  }
+
+  .shareBar,
+  .shareFooter,
+  .shareEmpty {
+    display: none !important;
+  }
+
+  .sharePage {
+    background: #fff;
+    min-height: auto;
+  }
+
+  .shareCanvas {
+    padding: 0;
+  }
+
+  .shareSheet {
+    box-shadow: none;
+    border-radius: 0;
+    width: 100%;
+  }
+}
