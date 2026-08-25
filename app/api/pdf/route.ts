@@ -57,6 +57,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ id, url: `/s/${id}` });
   } catch (e) {
     console.error("PDF share creation failed:", e);
+    console.error("TURSO_DATABASE_URL:", process.env.TURSO_DATABASE_URL ? "SET" : "MISSING");
+    console.error("TURSO_AUTH_TOKEN:", process.env.TURSO_AUTH_TOKEN ? "SET" : "MISSING");
     const msg = e instanceof Error ? e.message : "Could not create share link.";
     return NextResponse.json({ error: msg }, { status: 500 });
   }
