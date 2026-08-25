@@ -72,7 +72,12 @@ export default async function SharePage({
   params: Promise<{ token: string }>;
 }) {
   const { token } = await params;
-  const share = await getShare(token);
+  let share = null;
+  try {
+    share = await getShare(token);
+  } catch (e) {
+    console.error("Share page getShare error:", e);
+  }
   const payload = share ? sanitizePayload(share.payload) : null;
 
   if (!payload) {
