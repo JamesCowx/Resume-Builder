@@ -273,11 +273,21 @@ export type ShareRow = {
 export async function getShare(id: string): Promise<ShareRow | null> {
   if (!/^[0-9a-f]{32}$/i.test(id)) return null;
   await ensureTables();
-  const rows = await tursoExecute(
+  const result = await tursoExecuteRaw(
     "SELECT id, kind, name, payload, created_at FROM shares WHERE id = ?",
     [id]
   );
-  return (rows[0] as unknown as ShareRow) ?? null;
+  const rows = result?.response?.result?.rows;
+  if (!rows || !rows.length) return null;
+  const row = rows[0];
+  // Extract values from Turso's {type, value} format
+  return {
+    id: String(row[0]?.value ?? ""),
+    kind: String(row[1]?.value ?? ""),
+    name: String(row[2]?.value ?? ""),
+    payload: String(row[3]?.value ?? ""),
+    created_at: Number(row[4]?.value ?? 0),
+  };
 }
 
 export async function setPrintPayload(token: string, payload: string, expires: number) {
