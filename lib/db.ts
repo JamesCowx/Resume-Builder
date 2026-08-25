@@ -80,12 +80,13 @@ async function tursoExecute(sql: string, args: unknown[] = []) {
     throw new Error(`Turso error: ${result.error.message}`);
   }
   const rawRows = result?.response?.result?.rows || [];
-  const columns = result?.response?.result?.columns || [];
-  // Convert array rows to objects
-  return rawRows.map((row: unknown[]) => {
+  const columns = result?.response?.result?.cols || [];
+  // Convert array rows to objects, extracting .value from each cell
+  return rawRows.map((row: Array<{ type: string; value: unknown }>) => {
     const obj: Record<string, unknown> = {};
-    columns.forEach((col: string, i: number) => {
-      obj[col] = row[i];
+    columns.forEach((col: { name: string }, i: number) => {
+      const cell = row[i];
+      obj[col.name] = cell?.value ?? null;
     });
     return obj;
   });
