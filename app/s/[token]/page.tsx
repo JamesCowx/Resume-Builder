@@ -7,6 +7,7 @@ import type { TemplateId } from "@/components/Templates";
 import { CoverLetterDocument } from "@/components/CoverLetterDocument";
 import type { CoverTemplateId } from "@/components/CoverLetterDocument";
 import type { ResumeData, CoverLetterData } from "@/lib/types";
+import PrintButton from "./PrintButton";
 import "./share.css";
 
 export const dynamic = "force-dynamic";
@@ -125,9 +126,7 @@ export default async function SharePage({
           </span>
         </Link>
         <div style={{ display: "flex", gap: 10 }}>
-          <button className="sharePrintBtn" onClick={() => window.print()}>
-            Download PDF
-          </button>
+          <PrintButton />
           <Link href="/builder" className="shareCta">
             <Pencil size={14} strokeWidth={2.5} />
             Make your own
