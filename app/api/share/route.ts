@@ -64,6 +64,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ id, url: `/s/${id}` });
   } catch (e) {
     console.error("Share creation failed:", e);
+    console.error("TURSO_URL:", process.env.TURSO_DATABASE_URL?.substring(0, 30));
+    console.error("TURSO_TOKEN_LEN:", process.env.TURSO_AUTH_TOKEN?.length);
     const msg = e instanceof Error ? e.message : "Could not create share link.";
     return NextResponse.json({ error: msg }, { status: 500 });
   }
