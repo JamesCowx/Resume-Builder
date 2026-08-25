@@ -13,7 +13,7 @@ async function tursoExecute(sql: string, args: unknown[] = []) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${TURSO_TOKEN()}`,
+      Authorization: TURSO_TOKEN(),
     },
     body: JSON.stringify({
       requests: [
@@ -50,7 +50,7 @@ async function tursoBatch(statements: string[]) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${TURSO_TOKEN()}`,
+      Authorization: TURSO_TOKEN(),
     },
     body: JSON.stringify({
       requests: statements.map((sql) => ({
