@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ResumeData } from "@/lib/types";
 import type { AIAction } from "@/lib/ai";
 import { Camera, ChevronDown, ChevronUp, GripVertical, Plus, Sparkles, X } from "lucide-react";
@@ -210,6 +210,13 @@ export default function ResumeForm({
   const fileRef = useRef<HTMLInputElement>(null);
   const [photoError, setPhotoError] = useState<string | null>(null);
   const [dragId, setDragId] = useState<string | null>(null);
+  const [skillsInput, setSkillsInput] = useState(data.skills.join(", "));
+
+  // Sync skills input when data changes externally (e.g. AI, import, undo/redo)
+  useEffect(() => {
+    const joined = data.skills.join(", ");
+    setSkillsInput(joined);
+  }, [data.skills]);
 
   const handlePhoto = (file: File | undefined) => {
     if (!file) return;
@@ -582,8 +589,11 @@ export default function ResumeForm({
         <div className={styles.grid}>
           <Field
             label="Skills"
-            value={data.skills.join(", ")}
-            onChange={onSkillsChange}
+            value={skillsInput}
+            onChange={(v) => {
+              setSkillsInput(v);
+              onSkillsChange(v);
+            }}
             full
             placeholder="React, TypeScript, Figma, ..."
             hint="Separate skills with commas. You can also paste a whole list."
