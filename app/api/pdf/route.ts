@@ -55,7 +55,9 @@ export async function POST(req: NextRequest) {
       payload
     );
     return NextResponse.json({ id, url: `/s/${id}` });
-  } catch {
-    return NextResponse.json({ error: "Could not create share link." }, { status: 500 });
+  } catch (e) {
+    console.error("PDF share creation failed:", e);
+    const msg = e instanceof Error ? e.message : "Could not create share link.";
+    return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
