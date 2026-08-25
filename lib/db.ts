@@ -9,11 +9,13 @@ const TURSO_URL = () => {
 const TURSO_TOKEN = () => process.env.TURSO_AUTH_TOKEN || "";
 
 async function tursoExecute(sql: string, args: unknown[] = []) {
-  const res = await fetch(`${TURSO_URL()}/v2/pipeline`, {
+  const token = TURSO_TOKEN();
+  const url = `${TURSO_URL()}/v2/pipeline`;
+  const res = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: TURSO_TOKEN(),
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       requests: [
@@ -46,11 +48,13 @@ async function tursoExecute(sql: string, args: unknown[] = []) {
 }
 
 async function tursoBatch(statements: string[]) {
-  const res = await fetch(`${TURSO_URL()}/v2/pipeline`, {
+  const token = TURSO_TOKEN();
+  const url = `${TURSO_URL()}/v2/pipeline`;
+  const res = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: TURSO_TOKEN(),
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       requests: statements.map((sql) => ({
