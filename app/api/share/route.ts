@@ -26,7 +26,9 @@ export async function POST(req: NextRequest) {
 
   let body: ShareBody;
   try {
-    body = await req.json();
+    const raw = await req.text();
+    console.error("Share raw body length:", raw.length, "start:", raw.substring(0, 50));
+    body = JSON.parse(raw);
   } catch (e) {
     console.error("Share JSON parse error:", e);
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
