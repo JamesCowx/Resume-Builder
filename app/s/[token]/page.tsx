@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FileText, Pencil } from "lucide-react";
-import { getShare } from "@/lib/db";
+import { ensureTables, tursoExecuteRaw } from "@/lib/db";
 import { ResumeDocument } from "@/components/Templates";
 import type { TemplateId } from "@/components/Templates";
 import { CoverLetterDocument } from "@/components/CoverLetterDocument";
@@ -17,15 +17,8 @@ export const metadata: Metadata = {
 };
 
 const RESUME_IDS = new Set([
-  "modern",
-  "classic",
-  "minimal",
-  "executive",
-  "creative",
-  "compact",
-  "columns",
-  "timeline",
-  "elegant",
+  "modern", "classic", "minimal", "executive", "creative",
+  "compact", "columns", "timeline", "elegant",
 ]);
 const COVER_IDS = new Set(["cover-classic", "cover-clean"]);
 
@@ -47,21 +40,37 @@ function sanitizePayload(raw: string | undefined): Payload | null {
     if (typeof p.data !== "object" || p.data === null) return null;
     const kind = p.kind === "cover" ? "cover" : "resume";
     const template = str(p.template);
-    const accent = /^#[0-9a-fA-F]{6}$/.test(str(p.accent))
-      ? str(p.accent)
-      : "#1d4ed8";
-    const font = /^var\(--font-[a-z0-9]+\)$/.test(str(p.font))
-      ? str(p.font)
-      : "";
+    const accent = /^#[0-9a-fA-F]{6}$/.test(str(p.accent)) ? str(p.accent) : "#1d4ed8";
+    const font = /^var\(--font-[a-z0-9]+\)$/.test(str(p.font)) ? str(p.font) : "";
     return {
       kind,
       data: p.data,
-      template: kind === "cover" ? (COVER_IDS.has(template) ? (template as CoverTemplateId) : "cover-classic") : (RESUME_IDS.has(template) ? (template as TemplateId) : "modern"),
+      template: kind === "cover"
+        ? (COVER_IDS.has(template) ? (template as CoverTemplateId) : "cover-classic")
+        : (RESUME_IDS.has(template) ? (template as TemplateId) : "modern"),
       accent,
       font,
       name: str(p.name).slice(0, 120),
     };
   } catch {
+    return null;
+  }
+}
+
+async function getShareFromDb(token: string): Promise<string | null> {
+  if (!/^[0-9a-f]{32}$/i.test(token)) return null;
+  try {
+    await ensureTables();
+    const result = await tursoExecuteRaw(
+      "SELECT payload FROM shares WHERE id = ?",
+      [token]
+    );
+    const rows = result?.response?.result?.rows;
+    if (!rows || !rows.length) return null;
+    const cell = rows[0]?.[0];
+    return cell?.value ? String(cell.value) : null;
+  } catch (e) {
+    console.error("getShareFromDb error:", e);
     return null;
   }
 }
@@ -72,15 +81,8 @@ export default async function SharePage({
   params: Promise<{ token: string }>;
 }) {
   const { token } = await params;
-  let share = null;
-  try {
-    share = await getShare(token);
-    console.error("Share page getShare result:", share ? { id: share.id, kind: share.kind, payloadType: typeof share.payload, payloadLen: share.payload?.length } : null);
-  } catch (e) {
-    console.error("Share page getShare error:", e);
-  }
-  const payload = share ? sanitizePayload(share.payload) : null;
-  console.error("Share page payload:", payload ? { kind: payload.kind, hasData: !!payload.data } : null);
+  const rawPayload = await getShareFromDb(token);
+  const payload = sanitizePayload(rawPayload ?? undefined);
 
   if (!payload) {
     return (
@@ -124,10 +126,7 @@ export default async function SharePage({
           </span>
         </Link>
         <div style={{ display: "flex", gap: 10 }}>
-          <button
-            className="sharePrintBtn"
-            onClick={() => window.print()}
-          >
+          <button className="sharePrintBtn" onClick={() => window.print()}>
             Download PDF
           </button>
           <Link href="/builder" className="shareCta">
