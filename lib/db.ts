@@ -8,8 +8,11 @@ let initialized = false;
 
 function getClient(): Client {
   if (!client) {
+    const url = process.env.TURSO_DATABASE_URL!;
+    // Convert libsql:// to https:// for serverless HTTP compatibility
+    const httpUrl = url.replace(/^libsql:\/\//, "https://");
     client = createClient({
-      url: process.env.TURSO_DATABASE_URL!,
+      url: httpUrl,
       authToken: process.env.TURSO_AUTH_TOKEN,
     });
   }
