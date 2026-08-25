@@ -9,7 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@libsql/client": "^0.17.4",
     "docx": "^9.7.1",
     "lucide-react": "^1.31.0",
     "mammoth": "^1.12.1",
