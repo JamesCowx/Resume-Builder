@@ -8,6 +8,41 @@ const TURSO_URL = () => {
 };
 const TURSO_TOKEN = () => process.env.TURSO_AUTH_TOKEN || "";
 
+export async function tursoExecuteRaw(sql: string, args: unknown[] = []) {
+  const token = TURSO_TOKEN();
+  const url = `${TURSO_URL()}/v2/pipeline`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      requests: [
+        {
+          type: "execute",
+          stmt: {
+            sql,
+            args: args.map((a) =>
+              typeof a === "number"
+                ? { type: "integer", value: String(a) }
+                : { type: "text", value: String(a ?? "") }
+            ),
+          },
+        },
+      ],
+    }),
+  });
+
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    throw new Error(`Turso HTTP ${res.status}: ${text}`);
+  }
+
+  const json = await res.json();
+  return json.results?.[0];
+}
+
 async function tursoExecute(sql: string, args: unknown[] = []) {
   const token = TURSO_TOKEN();
   const url = `${TURSO_URL()}/v2/pipeline`;

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getShare } from "@/lib/db";
+import { ensureTables, tursoExecuteRaw } from "@/lib/db";
 
 export const runtime = "nodejs";
 
@@ -9,17 +9,12 @@ export async function GET(req: NextRequest) {
   if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 });
   
   try {
-    const share = await getShare(id);
-    if (!share) return NextResponse.json({ found: false });
-    return NextResponse.json({
-      found: true,
-      id: share.id,
-      kind: share.kind,
-      name: share.name,
-      payloadType: typeof share.payload,
-      payloadLength: typeof share.payload === "string" ? share.payload.length : "N/A",
-      payloadStart: typeof share.payload === "string" ? share.payload.substring(0, 100) : String(share.payload).substring(0, 100),
-    });
+    await ensureTables();
+    const result = await tursoExecuteRaw(
+      "SELECT id, kind, name, payload, created_at FROM shares WHERE id = ?",
+      [id]
+    );
+    return NextResponse.json(result);
   } catch (e) {
     return NextResponse.json({ error: e instanceof Error ? e.message : "Unknown" }, { status: 500 });
   }
