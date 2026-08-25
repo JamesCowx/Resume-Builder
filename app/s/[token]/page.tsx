@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FileText, Pencil } from "lucide-react";
-import { ensureTables, tursoExecuteRaw } from "@/lib/db";
+import { tursoExecuteRaw } from "@/lib/db";
 import { ResumeDocument } from "@/components/Templates";
 import type { TemplateId } from "@/components/Templates";
 import { CoverLetterDocument } from "@/components/CoverLetterDocument";
@@ -60,7 +60,6 @@ function sanitizePayload(raw: string | undefined): Payload | null {
 async function getShareFromDb(token: string): Promise<string | null> {
   if (!/^[0-9a-f]{32}$/i.test(token)) return null;
   try {
-    await ensureTables();
     const result = await tursoExecuteRaw(
       "SELECT payload FROM shares WHERE id = ?",
       [token]
