@@ -19,11 +19,16 @@ function getClient(): Client {
 async function ensureTables() {
   if (initialized) return;
   const db = getClient();
-  await db.execute("CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, email TEXT NOT NULL UNIQUE, pass_hash TEXT NOT NULL, created_at INTEGER NOT NULL)");
-  await db.execute("CREATE TABLE IF NOT EXISTS sessions (token TEXT PRIMARY KEY, user_id TEXT NOT NULL, created_at INTEGER NOT NULL)");
-  await db.execute("CREATE TABLE IF NOT EXISTS docs (id TEXT PRIMARY KEY, user_id TEXT NOT NULL, name TEXT NOT NULL, kind TEXT NOT NULL DEFAULT 'resume', payload TEXT NOT NULL, updated_at INTEGER NOT NULL)");
-  await db.execute("CREATE TABLE IF NOT EXISTS shares (id TEXT PRIMARY KEY, kind TEXT NOT NULL, name TEXT NOT NULL DEFAULT '', payload TEXT NOT NULL, created_at INTEGER NOT NULL)");
-  await db.execute("CREATE TABLE IF NOT EXISTS print_payloads (token TEXT PRIMARY KEY, payload TEXT NOT NULL, expires INTEGER NOT NULL)");
+  const tables = [
+    "CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, email TEXT NOT NULL UNIQUE, pass_hash TEXT NOT NULL, created_at INTEGER NOT NULL)",
+    "CREATE TABLE IF NOT EXISTS sessions (token TEXT PRIMARY KEY, user_id TEXT NOT NULL, created_at INTEGER NOT NULL)",
+    "CREATE TABLE IF NOT EXISTS docs (id TEXT PRIMARY KEY, user_id TEXT NOT NULL, name TEXT NOT NULL, kind TEXT NOT NULL DEFAULT 'resume', payload TEXT NOT NULL, updated_at INTEGER NOT NULL)",
+    "CREATE TABLE IF NOT EXISTS shares (id TEXT PRIMARY KEY, kind TEXT NOT NULL, name TEXT NOT NULL DEFAULT '', payload TEXT NOT NULL, created_at INTEGER NOT NULL)",
+    "CREATE TABLE IF NOT EXISTS print_payloads (token TEXT PRIMARY KEY, payload TEXT NOT NULL, expires INTEGER NOT NULL)",
+  ];
+  for (const sql of tables) {
+    await db.execute({ sql, args: [] });
+  }
   initialized = true;
 }
 
