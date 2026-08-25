@@ -75,10 +75,12 @@ export default async function SharePage({
   let share = null;
   try {
     share = await getShare(token);
+    console.error("Share page getShare result:", share ? { id: share.id, kind: share.kind, payloadType: typeof share.payload, payloadLen: share.payload?.length } : null);
   } catch (e) {
     console.error("Share page getShare error:", e);
   }
   const payload = share ? sanitizePayload(share.payload) : null;
+  console.error("Share page payload:", payload ? { kind: payload.kind, hasData: !!payload.data } : null);
 
   if (!payload) {
     return (
