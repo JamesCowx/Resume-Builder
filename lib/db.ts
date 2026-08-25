@@ -4,6 +4,7 @@ import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 export const SESSION_MAX_AGE = 60 * 60 * 24 * 30; // 30 days
 
 let client: Client | null = null;
+let initialized = false;
 
 function getClient(): Client {
   if (!client) {
@@ -13,6 +14,45 @@ function getClient(): Client {
     });
   }
   return client;
+}
+
+async function ensureTables() {
+  if (initialized) return;
+  const db = getClient();
+  await db.executeMultiple(`
+    CREATE TABLE IF NOT EXISTS users (
+      id TEXT PRIMARY KEY,
+      email TEXT NOT NULL UNIQUE,
+      pass_hash TEXT NOT NULL,
+      created_at INTEGER NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS sessions (
+      token TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      created_at INTEGER NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS docs (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      name TEXT NOT NULL,
+      kind TEXT NOT NULL DEFAULT 'resume',
+      payload TEXT NOT NULL,
+      updated_at INTEGER NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS shares (
+      id TEXT PRIMARY KEY,
+      kind TEXT NOT NULL,
+      name TEXT NOT NULL DEFAULT '',
+      payload TEXT NOT NULL,
+      created_at INTEGER NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS print_payloads (
+      token TEXT PRIMARY KEY,
+      payload TEXT NOT NULL,
+      expires INTEGER NOT NULL
+    );
+  `);
+  initialized = true;
 }
 
 export async function initDb() {
@@ -70,6 +110,7 @@ function verifyPassword(password: string, stored: string): boolean {
 const DUMMY_HASH = hashPassword("not-a-real-account");
 
 export async function createUser(email: string, password: string) {
+  await ensureTables();
   const id = randomBytes(16).toString("hex");
   await getClient().execute({
     sql: "INSERT INTO users (id, email, pass_hash, created_at) VALUES (?, ?, ?, ?)",
@@ -79,6 +120,7 @@ export async function createUser(email: string, password: string) {
 }
 
 export async function findUserByEmail(email: string) {
+  await ensureTables();
   const result = await getClient().execute({
     sql: "SELECT id, email, pass_hash FROM users WHERE email = ?",
     args: [email.toLowerCase()],
@@ -94,6 +136,7 @@ export async function checkLogin(email: string, password: string) {
 }
 
 export async function createSession(userId: string) {
+  await ensureTables();
   const token = randomBytes(32).toString("hex");
   await getClient().execute({
     sql: "INSERT INTO sessions (token, user_id, created_at) VALUES (?, ?, ?)",
@@ -103,11 +146,13 @@ export async function createSession(userId: string) {
 }
 
 export async function destroySession(token: string) {
+  await ensureTables();
   await getClient().execute({ sql: "DELETE FROM sessions WHERE token = ?", args: [token] });
 }
 
 export async function userForSession(token: string | undefined) {
   if (!token) return null;
+  await ensureTables();
   const cutoff = Date.now() - SESSION_MAX_AGE * 1000;
   const result = await getClient().execute({
     sql: "SELECT u.id, u.email FROM sessions s JOIN users u ON u.id = s.user_id WHERE s.token = ? AND s.created_at > ?",
@@ -125,6 +170,7 @@ export type StoredDocRow = {
 };
 
 export async function listDocs(userId: string): Promise<StoredDocRow[]> {
+  await ensureTables();
   const result = await getClient().execute({
     sql: "SELECT id, name, kind, payload, updated_at FROM docs WHERE user_id = ? ORDER BY updated_at DESC",
     args: [userId],
@@ -140,6 +186,7 @@ export async function upsertDoc(
   payload: string,
   updatedAt: number
 ): Promise<boolean> {
+  await ensureTables();
   const existing = await getClient().execute({
     sql: "SELECT user_id FROM docs WHERE id = ?",
     args: [docId],
@@ -156,6 +203,7 @@ export async function upsertDoc(
 }
 
 export async function deleteDoc(userId: string, docId: string) {
+  await ensureTables();
   await getClient().execute({
     sql: "DELETE FROM docs WHERE user_id = ? AND id = ?",
     args: [userId, docId],
@@ -163,6 +211,7 @@ export async function deleteDoc(userId: string, docId: string) {
 }
 
 export async function createShare(kind: string, name: string, payload: string) {
+  await ensureTables();
   const id = randomBytes(16).toString("hex");
   await getClient().execute({
     sql: "INSERT INTO shares (id, kind, name, payload, created_at) VALUES (?, ?, ?, ?, ?)",
@@ -181,6 +230,7 @@ export type ShareRow = {
 
 export async function getShare(id: string): Promise<ShareRow | null> {
   if (!/^[0-9a-f]{32}$/i.test(id)) return null;
+  await ensureTables();
   const result = await getClient().execute({
     sql: "SELECT id, kind, name, payload, created_at FROM shares WHERE id = ?",
     args: [id],
@@ -189,6 +239,7 @@ export async function getShare(id: string): Promise<ShareRow | null> {
 }
 
 export async function setPrintPayload(token: string, payload: string, expires: number) {
+  await ensureTables();
   await getClient().execute({
     sql: "INSERT INTO print_payloads (token, payload, expires) VALUES (?, ?, ?)",
     args: [token, payload, expires],
@@ -196,6 +247,7 @@ export async function setPrintPayload(token: string, payload: string, expires: n
 }
 
 export async function getPrintPayloadFromDb(token: string): Promise<string | null> {
+  await ensureTables();
   const result = await getClient().execute({
     sql: "SELECT payload, expires FROM print_payloads WHERE token = ?",
     args: [token],
@@ -210,6 +262,7 @@ export async function getPrintPayloadFromDb(token: string): Promise<string | nul
 }
 
 export async function sweepPrintPayloads() {
+  await ensureTables();
   await getClient().execute({
     sql: "DELETE FROM print_payloads WHERE expires < ?",
     args: [Date.now()],
