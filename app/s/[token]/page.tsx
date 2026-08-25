@@ -116,10 +116,18 @@ export default async function SharePage({
             Resume<span className="shareBrandFaint">Builder</span>
           </span>
         </Link>
-        <Link href="/builder" className="shareCta">
-          <Pencil size={14} strokeWidth={2.5} />
-          Make your own
-        </Link>
+        <div style={{ display: "flex", gap: 10 }}>
+          <button
+            className="sharePrintBtn"
+            onClick={() => window.print()}
+          >
+            Download PDF
+          </button>
+          <Link href="/builder" className="shareCta">
+            <Pencil size={14} strokeWidth={2.5} />
+            Make your own
+          </Link>
+        </div>
       </header>
 
       <div className="shareCanvas">
