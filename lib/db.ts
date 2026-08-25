@@ -44,7 +44,16 @@ async function tursoExecute(sql: string, args: unknown[] = []) {
   if (result?.error) {
     throw new Error(`Turso error: ${result.error.message}`);
   }
-  return result?.response?.result?.rows || [];
+  const rawRows = result?.response?.result?.rows || [];
+  const columns = result?.response?.result?.columns || [];
+  // Convert array rows to objects
+  return rawRows.map((row: unknown[]) => {
+    const obj: Record<string, unknown> = {};
+    columns.forEach((col: string, i: number) => {
+      obj[col] = row[i];
+    });
+    return obj;
+  });
 }
 
 async function tursoBatch(statements: string[]) {
