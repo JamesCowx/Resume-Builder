@@ -211,11 +211,20 @@ export default function ResumeForm({
   const [photoError, setPhotoError] = useState<string | null>(null);
   const [dragId, setDragId] = useState<string | null>(null);
   const [skillsInput, setSkillsInput] = useState(data.skills.join(", "));
+  const prevSkillsRef = useRef(data.skills);
 
-  // Sync skills input when data changes externally (e.g. AI, import, undo/redo)
+  // Sync skills input only when skills array changes externally (AI, import, undo/redo)
   useEffect(() => {
-    const joined = data.skills.join(", ");
-    setSkillsInput(joined);
+    const prev = prevSkillsRef.current;
+    const curr = data.skills;
+    // Only sync if the array actually changed (not on every render)
+    if (
+      prev.length !== curr.length ||
+      prev.some((s, i) => s !== curr[i])
+    ) {
+      setSkillsInput(curr.join(", "));
+    }
+    prevSkillsRef.current = curr;
   }, [data.skills]);
 
   const handlePhoto = (file: File | undefined) => {
@@ -587,17 +596,19 @@ export default function ResumeForm({
 
       <Section title="Skills">
         <div className={styles.grid}>
-          <Field
-            label="Skills"
-            value={skillsInput}
-            onChange={(v) => {
-              setSkillsInput(v);
-              onSkillsChange(v);
-            }}
-            full
-            placeholder="React, TypeScript, Figma, ..."
-            hint="Separate skills with commas. You can also paste a whole list."
-          />
+          <div className={`${styles.field} ${styles.gridFull}`}>
+            <label className={styles.label}>Skills</label>
+            <input
+              className={styles.input}
+              value={skillsInput}
+              onChange={(e) => setSkillsInput(e.target.value)}
+              onBlur={() => onSkillsChange(skillsInput)}
+              placeholder="React, TypeScript, Figma, ..."
+            />
+            <span className={styles.hint}>
+              Separate skills with commas. You can also paste a whole list.
+            </span>
+          </div>
         </div>
         {aiConfigured && (
           <div className={styles.aiRow}>
