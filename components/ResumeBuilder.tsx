@@ -812,12 +812,11 @@ export default function ResumeBuilder({
     commit((d) => ({ ...d, personal: { ...d.personal, [field]: value } }));
 
   const updateSkills = (value: string) => {
-    // Store raw string directly, parse on commit
     const skills = value
       .split(",")
       .map((s) => s.trim())
       .filter((s) => s.length > 0);
-    commit(() => ({ ...data, skills }));
+    commit((d) => ({ ...d, skills }));
   };
 
   const addItem = (field: ListField) =>

@@ -39,7 +39,7 @@ const bullets = (text: string) =>
     .filter(Boolean);
 
 const skillItems = (skills: string[]) =>
-  skills.map((s) => s.trim()).filter(Boolean);
+  skills.map((s) => s.trim()).filter((s) => s.length > 0);
 
 function Photo({ src, className }: { src: string; className: string }) {
   if (!src) return null;
