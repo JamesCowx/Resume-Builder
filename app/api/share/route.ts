@@ -27,11 +27,13 @@ export async function POST(req: NextRequest) {
   let body: ShareBody;
   try {
     body = await req.json();
-  } catch {
+  } catch (e) {
+    console.error("Share JSON parse error:", e);
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
   if (!body || typeof body.data !== "object" || body.data === null) {
+    console.error("Share validation failed:", { hasBody: !!body, dataType: typeof body?.data });
     return NextResponse.json({ error: "Missing resume data." }, { status: 400 });
   }
   if (req.headers.get("content-length") && Number(req.headers.get("content-length")) > MAX_PAYLOAD_BYTES) {
